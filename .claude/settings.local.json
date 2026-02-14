@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"c:\\\\Projects\\\\madame_massentoff\\\\public\\\\images\"\" 2>/dev/null || dir \"c:Projectsmadame_massentoffpublicimages \")",
+      "Bash(dir:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(npm install:*)",
+      "Bash(npx next build:*)",
+      "Bash(npx next dev:*)",
+      "Bash(taskkill:*)",
+      "Bash(pkill:*)",
+      "WebFetch(domain:itunes.apple.com)"
+    ]
+  }
+}

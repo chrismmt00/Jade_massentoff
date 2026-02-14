@@ -1,0 +1,80 @@
+export const images = {
+  heroPortrait: {
+    src: "/images/IMG_7045.jpg",
+    alt: "Jade Massentoff - dramatic portrait with red background and gold chains",
+    width: 1080,
+    height: 1080,
+  },
+  darkAngel: {
+    src: "/images/DSC00055.JPG",
+    alt: "Jade Massentoff - dark angel wings editorial shoot",
+    width: 1920,
+    height: 1600,
+  },
+  neonCouch: {
+    src: "/images/1I3A8367_Original.JPG",
+    alt: "Jade Massentoff - neon purple studio shoot",
+    width: 4000,
+    height: 6000,
+  },
+  neonStudio: {
+    src: "/images/1I3A8383_Original.JPG",
+    alt: "Jade Massentoff - neon magenta studio portrait",
+    width: 4000,
+    height: 6000,
+  },
+  neonClose: {
+    src: "/images/IMG_7697_Original.JPG",
+    alt: "Jade Massentoff - intimate neon purple closeup",
+    width: 4000,
+    height: 6000,
+  },
+  moodyBW: {
+    src: "/images/bodysuit11992.JPG",
+    alt: "Jade Massentoff - moody artistic portrait",
+    width: 5184,
+    height: 2726,
+  },
+  artBW: {
+    src: "/images/bodysuit12014_Original.JPG",
+    alt: "Jade Massentoff - artistic portrait with beaded frame",
+    width: 4000,
+    height: 6000,
+  },
+  bwLounge: {
+    src: "/images/1I3A8381_Original.JPG",
+    alt: "Jade Massentoff - black and white lounge portrait",
+    width: 4000,
+    height: 6000,
+  },
+  yellowCar: {
+    src: "/images/IMG_8325_Original.JPG",
+    alt: "Jade Massentoff - yellow wig car photoshoot",
+    width: 4000,
+    height: 6000,
+  },
+  urbanEdgy: {
+    src: "/images/surika -2.JPG",
+    alt: "Jade Massentoff - urban graffiti street style",
+    width: 3648,
+    height: 5472,
+  },
+  goldArches: {
+    src: "/images/1P8A1734.JPG",
+    alt: "Jade Massentoff - elegant gold architecture portrait",
+    width: 5568,
+    height: 4456,
+  },
+  speakerYellow: {
+    src: "/images/D95FCAB5-A0C2-453B-AEA8-D992AE6FE91A_Original.JPG",
+    alt: "Jade Massentoff - yellow wig on speaker",
+    width: 1080,
+    height: 1350,
+  },
+  yellowGraffiti: {
+    src: "/images/2745B0AF-5C9A-4880-8B8B-DA90ED551F2F_Original.JPG",
+    alt: "Jade Massentoff - yellow wig graffiti wall",
+    width: 1080,
+    height: 1080,
+  },
+};
