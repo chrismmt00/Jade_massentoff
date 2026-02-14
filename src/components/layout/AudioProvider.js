@@ -1,5 +1,12 @@
 "use client";
-import { createContext, useContext, useRef, useState, useCallback } from "react";
+import {
+  createContext,
+  useContext,
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 
 const AudioContext = createContext(null);
 
@@ -9,17 +16,22 @@ const PREVIEW_URL =
 export function AudioProvider({ children }) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const handlePause = useCallback(() => setIsPlaying(false), []);
+  const handlePlay = useCallback(() => setIsPlaying(true), []);
 
   const play = useCallback(() => {
     if (!audioRef.current) {
-      audioRef.current = new Audio(PREVIEW_URL);
-      audioRef.current.loop = true;
-      audioRef.current.volume = 0.5;
-      audioRef.current.addEventListener("pause", () => setIsPlaying(false));
-      audioRef.current.addEventListener("play", () => setIsPlaying(true));
+      const audio = new Audio(PREVIEW_URL);
+      audio.loop = true;
+      audio.volume = 0.5;
+      audio.addEventListener("pause", handlePause);
+      audio.addEventListener("play", handlePlay);
+      audioRef.current = audio;
     }
-    audioRef.current.play().catch(() => {});
-  }, []);
+    audioRef.current.play().catch(() => {
+      setIsPlaying(false);
+    });
+  }, [handlePause, handlePlay]);
 
   const pause = useCallback(() => {
     if (audioRef.current) {
@@ -34,6 +46,17 @@ export function AudioProvider({ children }) {
       play();
     }
   }, [isPlaying, play, pause]);
+
+  useEffect(() => {
+    return () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("play", handlePlay);
+      audio.pause();
+      audioRef.current = null;
+    };
+  }, [handlePause, handlePlay]);
 
   return (
     <AudioContext.Provider value={{ isPlaying, play, pause, toggle }}>

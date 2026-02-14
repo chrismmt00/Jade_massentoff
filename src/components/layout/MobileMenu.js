@@ -17,6 +17,17 @@ export default function MobileMenu({ isOpen, onClose }) {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -25,6 +36,7 @@ export default function MobileMenu({ isOpen, onClose }) {
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
           transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
+          id="mobile-nav-menu"
           className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-neon-black/95 backdrop-blur-lg"
         >
           <nav className="flex flex-col items-center gap-10">

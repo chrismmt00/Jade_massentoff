@@ -3,21 +3,38 @@ import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useAudio } from "./AudioProvider";
 
+const STORAGE_KEY = "site-entered";
+
 export default function SiteIntro() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(null);
   const { play } = useAudio();
 
   useEffect(() => {
-    const hasEntered = sessionStorage.getItem("site-entered");
-    if (!hasEntered) {
-      setShow(true);
-    }
+    const frameId = window.requestAnimationFrame(() => {
+      try {
+        const hasEntered = window.sessionStorage.getItem(STORAGE_KEY) === "true";
+        setShow(!hasEntered);
+      } catch {
+        // Some mobile/private contexts can block storage access.
+        setShow(true);
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
   }, []);
 
   function handleEnter() {
-    sessionStorage.setItem("site-entered", "true");
+    try {
+      window.sessionStorage.setItem(STORAGE_KEY, "true");
+    } catch {
+      // Ignore storage write failures and continue the entry flow.
+    }
     play();
     setShow(false);
+  }
+
+  if (show === null) {
+    return null;
   }
 
   return (

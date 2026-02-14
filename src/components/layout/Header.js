@@ -52,6 +52,8 @@ export default function Header() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-menu"
           >
             <span
               className={`h-px w-6 bg-pearl transition-all duration-300 ${
