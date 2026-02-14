@@ -13,7 +13,7 @@ export default function HeroSection() {
         alt={images.heroPortrait.alt}
         fill
         priority
-        className="object-cover object-top md:hidden"
+        className="animate-hero-image-pulse object-cover object-top md:hidden"
         sizes="100vw"
         quality={90}
       />
@@ -24,14 +24,14 @@ export default function HeroSection() {
         alt={images.urbanEdgy.alt}
         fill
         priority
-        className="hidden object-cover object-[center_20%] md:block"
+        className="animate-hero-image-pulse hidden object-cover object-[center_20%] md:block"
         sizes="100vw"
         quality={90}
       />
 
       {/* Gradient Overlays */}
       <div className="absolute inset-0 bg-gradient-to-t from-neon-black via-neon-black/50 to-neon-black/20" />
-      <div className="absolute inset-0 bg-neon-magenta/5 mix-blend-overlay" />
+      <div className="animate-hero-overlay-pulse absolute inset-0 bg-neon-magenta/15 mix-blend-overlay" />
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-end px-6 pb-20 text-center md:pb-28">

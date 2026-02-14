@@ -151,6 +151,31 @@ html {
   animation: float 2s ease-in-out infinite;
 }
 
+@keyframes hero-image-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(0.85) saturate(1);
+  }
+  50% {
+    transform: scale(1.035);
+    filter: brightness(0.95) saturate(1.08);
+  }
+}
+
+.animate-hero-image-pulse {
+  animation: hero-image-pulse 9s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+@keyframes hero-overlay-pulse {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.3; }
+}
+
+.animate-hero-overlay-pulse {
+  animation: hero-overlay-pulse 4.5s ease-in-out infinite;
+}
+
 /* === CUSTOM SCROLLBAR === */
 
 ::-webkit-scrollbar {
