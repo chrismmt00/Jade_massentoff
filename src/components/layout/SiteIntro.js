@@ -30,7 +30,10 @@ export default function SiteIntro() {
       // Ignore storage write failures and continue the entry flow.
     }
     try {
-      if (window.matchMedia("(min-width: 768px)").matches) {
+      const canAutoPlay =
+        window.matchMedia("(min-width: 1024px)").matches &&
+        window.matchMedia("(pointer: fine)").matches;
+      if (canAutoPlay) {
         play();
       }
     } catch {
