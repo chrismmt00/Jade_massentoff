@@ -1,32 +1,43 @@
 "use client";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { images } from "@/lib/images";
 import GlowButton from "@/components/ui/GlowButton";
 
 export default function HeroSection() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const updateMatch = () => setIsDesktop(mediaQuery.matches);
+    updateMatch();
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", updateMatch);
+      return () => mediaQuery.removeEventListener("change", updateMatch);
+    }
+
+    mediaQuery.addListener(updateMatch);
+    return () => mediaQuery.removeListener(updateMatch);
+  }, []);
+
+  const heroImage = isDesktop ? images.urbanEdgy : images.heroPortrait;
+
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Mobile Background Image */}
+      {/* Background Image */}
       <Image
-        src={images.heroPortrait.src}
-        alt={images.heroPortrait.alt}
+        key={heroImage.src}
+        src={heroImage.src}
+        alt={heroImage.alt}
         fill
         priority
-        className="animate-hero-image-pulse object-cover object-top md:hidden"
+        className={`animate-hero-image-pulse object-cover ${
+          isDesktop ? "object-[center_20%]" : "object-top"
+        }`}
         sizes="100vw"
-        quality={90}
-      />
-
-      {/* Desktop Background Image */}
-      <Image
-        src={images.urbanEdgy.src}
-        alt={images.urbanEdgy.alt}
-        fill
-        priority
-        className="animate-hero-image-pulse hidden object-cover object-[center_20%] md:block"
-        sizes="100vw"
-        quality={90}
+        quality={isDesktop ? 72 : 62}
       />
 
       {/* Gradient Overlays */}

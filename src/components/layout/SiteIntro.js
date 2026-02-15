@@ -29,7 +29,13 @@ export default function SiteIntro() {
     } catch {
       // Ignore storage write failures and continue the entry flow.
     }
-    play();
+    try {
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        play();
+      }
+    } catch {
+      // Ignore media-query failures and proceed without autoplay.
+    }
     setShow(false);
   }
 
