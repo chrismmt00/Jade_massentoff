@@ -60,7 +60,7 @@ export default function MerchPage() {
           transition={{ duration: 0.8, delay: 0.7 }}
           className="mx-auto mt-4 max-w-md font-body text-base leading-relaxed text-pearl-dim"
         >
-          Official Madame Massentoff merchandise dropping soon. Check out the
+          Official Jade Massentoff merchandise dropping soon. Check out the
           Amazon Shop in the meantime.
         </motion.p>
 

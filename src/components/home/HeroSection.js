@@ -47,7 +47,7 @@ export default function HeroSection() {
             reduceMotion ? "" : "animate-neon-pulse"
           }`}
         >
-          Madame Massentoff
+          Jade Massentoff
         </motion.h1>
 
         <motion.p

@@ -6,10 +6,10 @@ export const images = {
     height: 1080,
   },
   darkAngel: {
-    src: "/images/DSC00055.webp",
+    src: "/images/DSC00055_2200.webp",
     alt: "Jade Massentoff - dark angel wings editorial shoot",
-    width: 1920,
-    height: 1600,
+    width: 2200,
+    height: 1939,
   },
   neonCouch: {
     src: "/images/resized-image.webp",
@@ -30,16 +30,16 @@ export const images = {
     height: 1500,
   },
   moodyBW: {
-    src: "/images/bodysuit11992.webp",
+    src: "/images/bodysuit11992_2200.webp",
     alt: "Jade Massentoff - moody artistic portrait",
-    width: 5184,
-    height: 2726,
+    width: 2200,
+    height: 1168,
   },
   artBW: {
-    src: "/images/bodysuit12014_Original.webp",
+    src: "/images/bodysuit12014_2200.webp",
     alt: "Jade Massentoff - artistic portrait with beaded frame",
-    width: 4000,
-    height: 6000,
+    width: 1650,
+    height: 2200,
   },
   bwLounge: {
     src: "/images/resized-image (4).webp",
@@ -54,10 +54,10 @@ export const images = {
     height: 1500,
   },
   urbanEdgy: {
-    src: "/images/surika -2.webp",
+    src: "/images/surika-2_2200.webp",
     alt: "Jade Massentoff - urban graffiti street style",
-    width: 3648,
-    height: 5472,
+    width: 1412,
+    height: 2200,
   },
   goldArches: {
     src: "/images/resized-image (2).webp",

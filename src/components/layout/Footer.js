@@ -14,7 +14,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <p className="font-display text-3xl text-pearl">
-              Madame Massentoff
+              Jade Massentoff
             </p>
             <p className="mt-2 font-body text-sm tracking-wide text-pearl-dim">
               Creative R&B

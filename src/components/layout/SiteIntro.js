@@ -71,7 +71,7 @@ export default function SiteIntro() {
                 reduceMotion ? "" : "animate-neon-pulse"
               }`}
             >
-              Madame Massentoff
+              Jade Massentoff
             </h1>
             <p className="mt-4 font-body text-base uppercase tracking-[0.3em] text-pearl-dim sm:text-lg">
               Creative R&B

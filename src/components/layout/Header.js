@@ -25,7 +25,7 @@ export default function Header() {
             href="/"
             className="font-display text-2xl text-pearl transition-all duration-300 hover:neon-glow-magenta"
           >
-            Madame Massentoff
+            Jade Massentoff
           </Link>
 
           {/* Desktop Nav */}
