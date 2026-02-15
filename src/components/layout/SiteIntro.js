@@ -31,16 +31,7 @@ export default function SiteIntro() {
     } catch {
       // Ignore storage write failures and continue the entry flow.
     }
-    try {
-      const canAutoPlay =
-        window.matchMedia("(min-width: 1024px)").matches &&
-        window.matchMedia("(pointer: fine)").matches;
-      if (canAutoPlay) {
-        play();
-      }
-    } catch {
-      // Ignore media-query failures and proceed without autoplay.
-    }
+    play();
     setShow(false);
   }
 
