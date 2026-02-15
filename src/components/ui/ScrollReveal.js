@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "motion/react";
+import { useReducedMotionOrMobile } from "@/hooks/useReducedMotionOrMobile";
 
 const directions = {
   up: { y: 40 },
@@ -15,6 +16,12 @@ export default function ScrollReveal({
   delay = 0,
   className = "",
 }) {
+  const disableMotion = useReducedMotionOrMobile();
+
+  if (disableMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, ...directions[direction] }}

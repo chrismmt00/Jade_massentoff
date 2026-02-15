@@ -175,8 +175,40 @@ html {
 }
 
 @media (max-width: 767px) {
-  .animate-hero-image-pulse {
+  .animate-hero-image-pulse,
+  .animate-hero-overlay-pulse,
+  .animate-neon-pulse,
+  .animate-gradient {
     animation: none;
+  }
+
+  .mobile-no-blend {
+    mix-blend-mode: normal !important;
+    opacity: 0.12;
+  }
+
+  .neon-glow-magenta {
+    text-shadow:
+      0 0 4px var(--neon-magenta),
+      0 0 8px var(--neon-magenta);
+  }
+
+  .neon-glow-cyan {
+    text-shadow:
+      0 0 4px var(--neon-cyan),
+      0 0 8px var(--neon-cyan);
+  }
+
+  .neon-glow-gold {
+    text-shadow:
+      0 0 4px var(--neon-gold),
+      0 0 8px var(--neon-gold);
+  }
+
+  .neon-glow-red {
+    text-shadow:
+      0 0 4px var(--neon-red),
+      0 0 8px var(--neon-red);
   }
 
   .glass,

@@ -1,12 +1,19 @@
 "use client";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import StreamingLinks from "@/components/ui/StreamingLinks";
+import { useReducedMotionOrMobile } from "@/hooks/useReducedMotionOrMobile";
 
 export default function CTASection() {
+  const reduceMotion = useReducedMotionOrMobile();
+
   return (
     <section className="relative overflow-hidden px-6 py-24 md:py-32">
       {/* Animated gradient background */}
-      <div className="pointer-events-none absolute inset-0 animate-gradient bg-gradient-to-r from-neon-magenta/5 via-neon-purple/5 to-neon-cyan/5" />
+      <div
+        className={`pointer-events-none absolute inset-0 bg-gradient-to-r from-neon-magenta/5 via-neon-purple/5 to-neon-cyan/5 ${
+          reduceMotion ? "" : "animate-gradient"
+        }`}
+      />
 
       <div className="relative mx-auto max-w-3xl text-center">
         <ScrollReveal>

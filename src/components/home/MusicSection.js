@@ -1,11 +1,44 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import StreamingLinks from "@/components/ui/StreamingLinks";
+import { useIsMobile } from "@/hooks/useIsMobile";
+
+const SPOTIFY_EMBED_URL =
+  "https://open.spotify.com/embed/artist/0trWeG8FrBw1kjZNYYoMUd?utm_source=generator&theme=0";
 
 export default function MusicSection() {
+  const sectionRef = useRef(null);
+  const isMobile = useIsMobile();
+  const [desktopReady, setDesktopReady] = useState(false);
+  const [mobileRequested, setMobileRequested] = useState(false);
+
+  useEffect(() => {
+    if (isMobile) return;
+
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setDesktopReady(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px" },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [isMobile]);
+
+  const shouldLoadEmbed = mobileRequested || (!isMobile && desktopReady);
+
   return (
     <section
       id="music"
+      ref={sectionRef}
       className="relative overflow-hidden px-6 py-24 md:py-32"
     >
       {/* Subtle radial glow */}
@@ -24,16 +57,37 @@ export default function MusicSection() {
         {/* Spotify Embed */}
         <ScrollReveal delay={0.1}>
           <div className="glass-card mx-auto max-w-2xl overflow-hidden rounded-2xl p-4">
-            <iframe
-              src="https://open.spotify.com/embed/artist/0trWeG8FrBw1kjZNYYoMUd?utm_source=generator&theme=0"
-              width="100%"
-              height="352"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-              className="rounded-xl"
-              title="Spotify - Jade Massentoff"
-            />
+            {shouldLoadEmbed ? (
+              <iframe
+                src={SPOTIFY_EMBED_URL}
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                className="rounded-xl"
+                title="Spotify - Jade Massentoff"
+              />
+            ) : (
+              <div className="flex h-[352px] flex-col items-center justify-center rounded-xl border border-white/10 bg-neon-deep/80 px-6 text-center">
+                <p className="font-body text-xs font-semibold uppercase tracking-widest text-pearl-dim">
+                  Spotify Player
+                </p>
+                {isMobile ? (
+                  <button
+                    type="button"
+                    onClick={() => setMobileRequested(true)}
+                    className="mt-6 inline-flex items-center justify-center rounded-full border border-neon-magenta bg-neon-magenta/20 px-6 py-2.5 font-body text-xs font-semibold uppercase tracking-widest text-pearl transition-colors duration-300 hover:bg-neon-magenta/35"
+                  >
+                    Tap to Load Spotify
+                  </button>
+                ) : (
+                  <p className="mt-4 font-body text-sm text-pearl-dim">
+                    Loading player...
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </ScrollReveal>
 

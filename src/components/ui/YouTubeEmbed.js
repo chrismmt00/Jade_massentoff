@@ -4,6 +4,18 @@ import Image from "next/image";
 
 export default function YouTubeEmbed({ videoId, title }) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [thumbnailSrc, setThumbnailSrc] = useState(
+    `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+  );
+  const [thumbnailUnavailable, setThumbnailUnavailable] = useState(false);
+
+  function handleThumbnailError() {
+    if (thumbnailSrc.includes("maxresdefault.jpg")) {
+      setThumbnailSrc(`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`);
+      return;
+    }
+    setThumbnailUnavailable(true);
+  }
 
   if (isLoaded) {
     return (
@@ -24,13 +36,20 @@ export default function YouTubeEmbed({ videoId, title }) {
       onClick={() => setIsLoaded(true)}
       className="group relative aspect-video w-full overflow-hidden rounded-lg"
     >
-      <Image
-        src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
-        alt={title}
-        fill
-        className="object-cover transition-transform duration-500 group-hover:scale-105"
-        sizes="(max-width: 768px) 100vw, 33vw"
-      />
+      {thumbnailUnavailable ? (
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neon-deep to-neon-black px-4 text-center">
+          <p className="font-body text-sm font-medium text-pearl">{title}</p>
+        </div>
+      ) : (
+        <Image
+          src={thumbnailSrc}
+          alt={title}
+          fill
+          onError={handleThumbnailError}
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+      )}
       <div className="absolute inset-0 bg-neon-black/40 transition-colors duration-300 group-hover:bg-neon-black/20" />
 
       {/* Play button */}

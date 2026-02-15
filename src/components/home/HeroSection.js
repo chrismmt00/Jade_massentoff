@@ -1,28 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { images } from "@/lib/images";
 import GlowButton from "@/components/ui/GlowButton";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { useReducedMotionOrMobile } from "@/hooks/useReducedMotionOrMobile";
 
 export default function HeroSection() {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
-    const updateMatch = () => setIsDesktop(mediaQuery.matches);
-    updateMatch();
-
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener("change", updateMatch);
-      return () => mediaQuery.removeEventListener("change", updateMatch);
-    }
-
-    mediaQuery.addListener(updateMatch);
-    return () => mediaQuery.removeListener(updateMatch);
-  }, []);
-
-  const heroImage = isDesktop ? images.urbanEdgy : images.heroPortrait;
+  const isMobile = useIsMobile();
+  const reduceMotion = useReducedMotionOrMobile();
+  const heroImage = isMobile ? images.heroPortrait : images.urbanEdgy;
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
@@ -33,16 +20,22 @@ export default function HeroSection() {
         alt={heroImage.alt}
         fill
         priority
-        className={`animate-hero-image-pulse object-cover ${
-          isDesktop ? "object-[center_20%]" : "object-top"
+        className={`${reduceMotion ? "" : "animate-hero-image-pulse"} object-cover ${
+          isMobile ? "object-top" : "object-[center_20%]"
         }`}
         sizes="100vw"
-        quality={isDesktop ? 72 : 62}
+        quality={isMobile ? 62 : 72}
       />
 
       {/* Gradient Overlays */}
       <div className="absolute inset-0 bg-gradient-to-t from-neon-black via-neon-black/50 to-neon-black/20" />
-      <div className="animate-hero-overlay-pulse absolute inset-0 bg-neon-magenta/15 mix-blend-overlay" />
+      <div
+        className={`absolute inset-0 bg-neon-magenta/15 ${
+          reduceMotion
+            ? "mobile-no-blend"
+            : "animate-hero-overlay-pulse mix-blend-overlay"
+        }`}
+      />
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-end px-6 pb-20 text-center md:pb-28">
@@ -50,7 +43,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="font-display text-5xl text-pearl animate-neon-pulse sm:text-6xl md:text-8xl lg:text-9xl"
+          className={`font-display text-5xl text-pearl sm:text-6xl md:text-8xl lg:text-9xl ${
+            reduceMotion ? "" : "animate-neon-pulse"
+          }`}
         >
           Madame Massentoff
         </motion.h1>
@@ -80,13 +75,19 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2"
-      >
-        <div className="h-8 w-px bg-gradient-to-b from-neon-magenta to-transparent" />
-      </motion.div>
+      {reduceMotion ? (
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
+          <div className="h-8 w-px bg-gradient-to-b from-neon-magenta to-transparent" />
+        </div>
+      ) : (
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2"
+        >
+          <div className="h-8 w-px bg-gradient-to-b from-neon-magenta to-transparent" />
+        </motion.div>
+      )}
     </section>
   );
 }

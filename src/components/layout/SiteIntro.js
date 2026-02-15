@@ -2,12 +2,14 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useAudio } from "./AudioProvider";
+import { useReducedMotionOrMobile } from "@/hooks/useReducedMotionOrMobile";
 
 const STORAGE_KEY = "site-entered";
 
 export default function SiteIntro() {
   const [show, setShow] = useState(null);
   const { play } = useAudio();
+  const reduceMotion = useReducedMotionOrMobile();
 
   useEffect(() => {
     const frameId = window.requestAnimationFrame(() => {
@@ -64,7 +66,11 @@ export default function SiteIntro() {
             transition={{ duration: 1, delay: 0.2 }}
             className="relative text-center"
           >
-            <h1 className="font-display text-5xl text-pearl animate-neon-pulse sm:text-7xl md:text-8xl">
+            <h1
+              className={`font-display text-5xl text-pearl sm:text-7xl md:text-8xl ${
+                reduceMotion ? "" : "animate-neon-pulse"
+              }`}
+            >
               Madame Massentoff
             </h1>
             <p className="mt-4 font-body text-base uppercase tracking-[0.3em] text-pearl-dim sm:text-lg">
